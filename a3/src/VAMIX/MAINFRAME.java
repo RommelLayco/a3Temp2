@@ -245,6 +245,16 @@ public class MAINFRAME {
 		overlay.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_U, InputEvent.CTRL_MASK));
 		Tools.add(overlay);
 		
+		
+		createTitlePage = new JMenuItem("createTitlePage");
+		createTitlePage.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new CreateTitlePageMenu();
+			}
+		});
+		createTitlePage.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_T, InputEvent.CTRL_MASK));
+		Tools.add(createTitlePage);
+		
 
 		textEditor = new JMenuItem("Text Editor");
 		textEditor.addActionListener(new ActionListener() {
