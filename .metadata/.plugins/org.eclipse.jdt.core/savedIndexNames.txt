@@ -1,0 +1,17 @@
+INDEX VERSION 1.126+/afs/ec.auckland.ac.nz/users/y/w/ywan578/unixhome/a3Git/.metadata/.plugins/org.eclipse.jdt.core
+3820330004.index
+1995728797.index
+687774932.index
+1552659266.index
+287137997.index
+3373220309.index
+3400140653.index
+2670580053.index
+2093078249.index
+1557023865.index
+4274785480.index
+502664218.index
+258401087.index
+743561567.index
+1571133879.index
+3570624956.index
