@@ -49,6 +49,8 @@ public class MAINFRAME {
 	private JMenuItem downloadMenu;
 	private JMenuItem saveAsMenu;
 	private JMenuItem replace;
+	private JMenuItem overlay;
+	private JMenuItem createTitlePage;
 
 	private static boolean CAN_SAVE = false;
 	private JMenuItem textEditor;
@@ -209,6 +211,40 @@ public class MAINFRAME {
 		});
 		replace.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_R, InputEvent.CTRL_MASK));
 		Tools.add(replace);
+		
+		overlay = new JMenuItem("overlay");
+		overlay.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JFrame messageFrame = new JFrame();
+				JOptionPane.showMessageDialog(messageFrame, "Open video file to overlay","VAMIX", JOptionPane.INFORMATION_MESSAGE);
+				
+				//Store file locations
+				String videoPathInput = open();
+				
+				JOptionPane.showMessageDialog(messageFrame, "Open audio file to overlay","VAMIX", JOptionPane.INFORMATION_MESSAGE);
+				
+				String audeoPathInput = open();
+				
+				JOptionPane.showMessageDialog(messageFrame, "Save overlay file to a location","VAMIX", JOptionPane.INFORMATION_MESSAGE);
+				String newFileSavePath = fileSaver.savePath();
+				newFileSavePath =newFileSavePath+ ".mp4"; //add .mp4 to file name
+				
+
+				if(!(videoPathInput==null) && !(newFileSavePath==null) && !(audeoPathInput==null)){
+					overlay overlayingLocations = new overlay(videoPathInput,audeoPathInput,newFileSavePath);
+					overlayingLocations.execute();
+				} else {
+					//display pop up menu error
+				}
+
+
+
+
+			}
+		});
+		overlay.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_U, InputEvent.CTRL_MASK));
+		Tools.add(overlay);
+		
 
 		textEditor = new JMenuItem("Text Editor");
 		textEditor.addActionListener(new ActionListener() {
