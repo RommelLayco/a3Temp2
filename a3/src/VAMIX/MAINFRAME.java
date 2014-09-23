@@ -112,7 +112,12 @@ public class MAINFRAME {
 		open.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String p = open();
-				mediaPlayer.playMedia(p);
+				if(p ==null){
+					JOptionPane.showMessageDialog(null, "No file selected","VAMIX", 
+							JOptionPane.INFORMATION_MESSAGE);
+				} else {
+					mediaPlayer.playMedia(p);
+				}
 			}
 		});
 		FileMenu.add(open);
@@ -211,24 +216,24 @@ public class MAINFRAME {
 		});
 		replace.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_R, InputEvent.CTRL_MASK));
 		Tools.add(replace);
-		
+
 		overlay = new JMenuItem("overlay");
 		overlay.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JFrame messageFrame = new JFrame();
 				JOptionPane.showMessageDialog(messageFrame, "Open video file to overlay","VAMIX", JOptionPane.INFORMATION_MESSAGE);
-				
+
 				//Store file locations
 				String videoPathInput = open();
-				
+
 				JOptionPane.showMessageDialog(messageFrame, "Open audio file to overlay","VAMIX", JOptionPane.INFORMATION_MESSAGE);
-				
+
 				String audeoPathInput = open();
-				
+
 				JOptionPane.showMessageDialog(messageFrame, "Save overlay file to a location","VAMIX", JOptionPane.INFORMATION_MESSAGE);
 				String newFileSavePath = fileSaver.savePath();
 				newFileSavePath =newFileSavePath+ ".mp4"; //add .mp4 to file name
-				
+
 
 				if(!(videoPathInput==null) && !(newFileSavePath==null) && !(audeoPathInput==null)){
 					overlay overlayingLocations = new overlay(videoPathInput,audeoPathInput,newFileSavePath);
@@ -244,8 +249,8 @@ public class MAINFRAME {
 		});
 		overlay.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_U, InputEvent.CTRL_MASK));
 		Tools.add(overlay);
-		
-		
+
+
 		createTitlePage = new JMenuItem("createTitlePage");
 		createTitlePage.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -254,7 +259,7 @@ public class MAINFRAME {
 		});
 		createTitlePage.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_T, InputEvent.CTRL_MASK));
 		Tools.add(createTitlePage);
-		
+
 
 		textEditor = new JMenuItem("Text Editor");
 		textEditor.addActionListener(new ActionListener() {
@@ -288,10 +293,17 @@ public class MAINFRAME {
 		//get file
 		chooser.showOpenDialog(null);
 		File f = chooser.getSelectedFile();
-		String path = f.getAbsolutePath();
-		return path;
+
+		//prevent a null pointer exception
+		if(f == null){
+			return null;
+		} else {
+			String path = f.getAbsolutePath();
+			return path;
+		}
+
 	}
-	
+
 	//checking git
 
 
