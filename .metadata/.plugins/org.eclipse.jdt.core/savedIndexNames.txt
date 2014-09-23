@@ -11,7 +11,6 @@ INDEX VERSION 1.126+/afs/ec.auckland.ac.nz/users/y/w/ywan578/unixhome/a3Git/.met
 1557023865.index
 4274785480.index
 502664218.index
-258401087.index
 743561567.index
 1571133879.index
 3570624956.index
