@@ -10,6 +10,7 @@ import java.io.InputStreamReader;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -49,14 +50,21 @@ public class Text extends SwingWorker<Void, Integer>  {
 	private static String textField = null;
 	private static String durationTime = null;
 	private static String cwd;
-	
+
 
 	private static String fileOpen; 
 	private static boolean saveable = false;
 	private static boolean end = false;
 	private static boolean ableToAdd = true;
 
-
+	//create font list
+	private String[] fonts = { "DroidSans", "NanumGothic", "eufm10", "Waree", "Phetsarath_OT", "Padauk", 
+	"FreeSans"};
+	private  JComboBox fontChooser; 
+	private String font = "DroidSans";
+	private String[] fontsizes = { "12", "14", "16", "18", "20", "22", "24"};
+	private JComboBox fontsize;
+	private String size = "12";
 
 	/**
 	 * @wbp.parser.constructor
@@ -125,16 +133,32 @@ public class Text extends SwingWorker<Void, Integer>  {
 							JOptionPane.INFORMATION_MESSAGE);
 				} else {
 					//create swingworker object
-					
+
 
 					//show progress activity
 					loading.setIndeterminate(true);
 					execute();
-					
-				;
+
+					;
 				}
 			}
 		});
+
+
+		//create font changer
+		fontChooser = new JComboBox(fonts);
+		fontChooser.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				font = (String) fontChooser.getSelectedItem();
+			}
+		});
+		fontsize = new JComboBox(fontsizes);
+		fontsize.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				size = (String) fontsize.getSelectedItem();
+			}
+		});
+
 
 		closing = new JCheckBox("Closing");
 		closing.setToolTipText("Check to add text to closing scene");
@@ -174,6 +198,8 @@ public class Text extends SwingWorker<Void, Integer>  {
 		textPanel.setBackground(Color.BLACK);
 		textPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		textPanel.add(text);
+		textPanel.add(fontChooser);
+		textPanel.add(fontsize);
 
 		JPanel buttonPanel = new JPanel();
 		buttonPanel.setBounds(4, 50, 600, 50);
@@ -209,11 +235,12 @@ public class Text extends SwingWorker<Void, Integer>  {
 		cwd = System.getProperty("user.dir");
 		//add temp name
 		cwd = cwd + "/temp1.mp4";
-		
-		
 
-		String cmd = "avconv -y -i " + fileOpen + " -vf \"drawtext=fontfile='/usr/share/fonts/truetype/ttf-dejavu/DejaVuSans.ttf':text='"
-				+textField+"':x=text_w:y=50:fontsize=24:fontcolor=black: draw='lt(t," +durationTime+")'\"" +
+		//get file location of font
+		String fileFont = fontsMaps.getfonts(font);
+
+		String cmd = "avconv -y -i " + fileOpen + " -vf \"drawtext=fontfile='" + fileFont + "':text='"
+				+textField+"':x=text_w:y=50:fontsize="+size+":fontcolor=black: draw='lt(t," +durationTime+")'\"" +
 				" -strict experimental " + cwd;
 		ProcessBuilder builder = new ProcessBuilder("/bin/bash", "-c", cmd);
 		Process p = builder.start();
@@ -248,7 +275,7 @@ public class Text extends SwingWorker<Void, Integer>  {
 		//reset input to null
 		textField = null;
 		durationTime = null;
-		
+
 		loading.setIndeterminate(false);
 		loading.setValue(0);
 		preview.playMedia(cwd);
@@ -297,16 +324,18 @@ public class Text extends SwingWorker<Void, Integer>  {
 		} 
 
 		//---------- ADD to video ---------
-		
+
 		//Store temp in working directory
 		cwd = System.getProperty("user.dir");
 		//add temp name
 		cwd = cwd + "/temp1.mp4";
-	
+
+		//get file location of font
+		String fileFont = fontsMaps.getfonts(font);
 
 
-		String cmd = "avconv -y -i " + fileOpen + " -vf \"drawtext=fontfile='/usr/share/fonts/truetype/ttf-dejavu/DejaVuSans.ttf':text='"
-				+textField+"':x=text_w:y=50:fontsize=24:fontcolor=black: draw='gt(t," +d+")'\"" +
+		String cmd = "avconv -y -i " + fileOpen + " -vf \"drawtext=fontfile='"+fileFont+"':text='"
+				+textField+"':x=text_w:y=50:fontsize="+size+":fontcolor=black: draw='gt(t," +d+")'\"" +
 				" -strict experimental " + cwd;
 		ProcessBuilder builder = new ProcessBuilder("/bin/bash", "-c", cmd);
 		Process p = builder.start();
@@ -315,6 +344,6 @@ public class Text extends SwingWorker<Void, Integer>  {
 
 
 	}
-	
+
 
 }

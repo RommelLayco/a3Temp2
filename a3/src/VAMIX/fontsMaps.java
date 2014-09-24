@@ -16,7 +16,7 @@ public class fontsMaps {
 		fonts.put("FreeSans", "/usr/share/fonts/truetype/freefont/FreeSans.ttf");
 		
 	}
-	public String getfonts(String key){
+	public static String getfonts(String key){
 		return fonts.get(key);
 		
 	}

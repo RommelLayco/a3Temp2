@@ -57,6 +57,8 @@ public class MAINFRAME {
 
 	public static void main(final String[] args) {
 
+		//create font map
+		fontsMaps.createMap();
 
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override
