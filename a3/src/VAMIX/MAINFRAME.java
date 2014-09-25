@@ -30,6 +30,8 @@ import javax.swing.filechooser.FileFilter;
 import java.awt.event.KeyEvent;
 import java.awt.event.InputEvent;
 
+
+
 public class MAINFRAME {
 
 	private JFrame mainFrame;
@@ -73,7 +75,13 @@ public class MAINFRAME {
 		mainFrame.setBounds(100, 100, 500, 400);
 		FullScreenStrategy fullScreenStrategy = new DefaultFullScreenStrategy(
 				mainFrame);
-
+/**
+ * Code to create factory down to add menu
+ * taken from git hub. Did not understand the role of 
+ * the medaiPlayer factory.
+ * 
+ * https://github.com/caprica/vlcj/tree/master/src/test/java/uk/co/caprica/vlcj/test
+ */
 		// create factory
 		mediaPlayerFactory = new MediaPlayerFactory();
 		mediaPlayerFactory.setUserAgent("VAMIX");
@@ -282,6 +290,11 @@ public class MAINFRAME {
 		JFileChooser chooser = new JFileChooser();
 		chooser.setDialogTitle("Specify a file to open");
 
+		/**
+		 * Code to add filters take from git hub
+		 * https://github.com/caprica/vlcj/tree/master/src/test/java/uk/co/caprica/vlcj/test
+		 */
+		
 		//filter to only audio and media files
 		chooser.addChoosableFileFilter(SwingFileFilterFactory.newVideoFileFilter());
 		chooser.addChoosableFileFilter(SwingFileFilterFactory.newAudioFileFilter());

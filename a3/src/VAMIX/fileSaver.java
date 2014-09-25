@@ -16,6 +16,11 @@ public class fileSaver extends JFileChooser {
 
 		JFileChooser chooser = new JFileChooser(){	
 
+			/**
+			 * Code to check if file exist taken from stackoverflow
+			 * http://stackoverflow.com/questions/3651494/jfilechooser-with-confirmation-dialog
+			 */
+			
 			@Override
 			public void approveSelection(){
 				File f = getSelectedFile();

@@ -18,6 +18,15 @@ import java.awt.event.ActionEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.ChangeEvent;
 
+/**
+ * Got code to add buttons from github
+ * https://github.com/caprica/vlcj/tree/master/src/test/java/uk/co/caprica/vlcj/test
+ * 
+ * 
+ * removed code I did not understand.
+ *
+ */
+
 public class MediaControl extends JPanel {
 
 	private static final float NORMAL_SPEED = 1;
